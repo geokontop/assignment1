@@ -17,7 +17,7 @@
 1. Define a handlers object with
     - hello handler function, returns statusCode 200 and a payload
     - notFound handler function, returns statusCode 404
-1. Write the server response inside request end callback. 
+1. Write the server response inside request's end event callback. 
     - Choose the handler 
     - Construct the response data
     - Route accordingly calling the chosen handler
