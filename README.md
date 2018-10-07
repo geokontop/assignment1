@@ -6,7 +6,7 @@
 1. Inside createServer 
     - Get URL and parse it
     - Extract path from URL
-    - Trimm '/' from begining and end
+    - Trimm '/' from begining and end of path
     - Initialize variable buffer that will accumulate the incoming stream - decoded
     - Bind to  event 'data' that the request object emmits
         - In the event callback we collect the incoming payload stream, if any
