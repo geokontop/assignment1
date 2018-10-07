@@ -10,7 +10,7 @@
  var url = require('url');
  var StringDecoder = require('string_decoder').StringDecoder;
 
-var server = http.createServer((req,res)=>{
+var server = http.createServer(function(req,res){
     
     // Get the URL and parse it
     var parsedUrl = url.parse(req.url,true);
@@ -33,10 +33,10 @@ var server = http.createServer((req,res)=>{
     // Get the payload, if any
     var decoder = new StringDecoder('utf-8');
     var buffer = '';
-    req.on('data',(data)=>{
+    req.on('data',function(data){
         buffer += decoder.write(data);
     });
-    req.on('end',()=>{
+    req.on('end',function(){
         buffer += decoder.end();
         
         // Choose the handler the request should go to. If one is not found, use the notFound handler.
@@ -52,7 +52,7 @@ var server = http.createServer((req,res)=>{
         };
 
         // Route the request to the chosen handler  
-        chosenHandler(data, (statusCode, payload)=>{
+        chosenHandler(data, function(statusCode, payload){
             // Use the status code called back by the handler or default to 200
             statusCode= typeof(statusCode) == 'number'? statusCode:200;
 
@@ -75,7 +75,7 @@ var server = http.createServer((req,res)=>{
 
 })
 
-server.listen(3010,()=>{
+server.listen(3010,function(){
     console.log('The server is listening on port 3010')
 })
 
@@ -84,13 +84,13 @@ server.listen(3010,()=>{
 var handlers = {};
 
 // Sample handler
-handlers.hello =(data, callback)=>{
+handlers.hello =function(data, callback){
     // Callback a http status code, and a payload object
     callback(200,{'assignment1': 'assignment fulfilled'});
 }
 
 // Not found handler
-handlers.notFound = (data, callback)=>{
+handlers.notFound = function(data, callback){
     callback(404);
 }
 

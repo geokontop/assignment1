@@ -1,7 +1,5 @@
 # Assignment_1
 
-using ES 6 Arrow function expressions
-
 ## Steps
 1. Create an http server
 1. Server listens on port 3010
